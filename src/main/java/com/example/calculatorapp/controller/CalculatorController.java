@@ -18,7 +18,7 @@ public class CalculatorController {
     private final CalculatorService calculatorService;
 
     @PostMapping("/calculate")
-    public ResponseEntity<CalculationResponse> calculte(
+    public ResponseEntity<CalculationResponse> calculate(
             @Valid @RequestBody CalculationRequest request
     ) {
         try {
