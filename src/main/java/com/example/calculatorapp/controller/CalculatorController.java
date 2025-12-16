@@ -37,4 +37,25 @@ public class CalculatorController {
                     .body(CalculationResponse.error(e.getMessage()));
         }
     }
+
+    @PostMapping("/calculate-single")
+    public ResponseEntity<CalculationResponse> calculateSingle(
+            @RequestBody SingleOperationRequest request
+    ) {
+        try {
+            Double result = calculatorService.calculateSingle(
+                    request.operand,
+                    request.operation
+            );
+            return ResponseEntity.ok(CalculationResponse.success(result));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(CalculationResponse.error(e.getMessage()));
+        }
+    }
+
+    public static class SingleOperationRequest {
+        public Double operand;
+        public String operation;  // "reciprocal", "square", "sqrt", "percent", "negate"
+    }
 }
